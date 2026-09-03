@@ -1,0 +1,196 @@
+/* ============================================================================
+   CASA DI SOLARE — TOKENS & BASE
+   Palette: ref.html (house site) blended with design_reference.txt
+   ========================================================================== */
+
+:root {
+  --cream: #f4ecdc;
+  --cream2: #ede1cb;
+  --ink: #221812;
+  --ink-soft: #5a4838;
+  --terra: #c15a2e;
+  --terra-deep: #a34a22;
+  --gold: #d9a441;
+  --umber: #241509;
+  --hair: rgba(34, 24, 18, 0.18);
+
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'Space Mono', ui-monospace, monospace;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --pad: 6vw;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font: 400 16px/1.6 var(--sans);
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body.loading {
+  overflow: hidden;
+}
+
+::selection {
+  background: var(--terra);
+  color: var(--cream);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--terra);
+  outline-offset: 3px;
+}
+
+section {
+  scroll-margin-top: 70px;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+/* ---------- utilities ---------- */
+
+.mono {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.mask {
+  overflow: hidden;
+}
+
+.frame-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 2500;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+
+/* ---------- frame placeholders (drop your images here) ---------- */
+
+.frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--cream2);
+}
+
+.frame > img,
+.frame > video,
+.frame-ph {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.32) saturate(1.12) contrast(1.03) brightness(0.97);
+  transition: transform 1.4s var(--ease);
+}
+
+.frame:hover > img,
+.frame:hover > video,
+.frame:hover .frame-ph {
+  transform: scale(1.06);
+}
+
+.frame-ph {
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(120% 90% at 50% 100%, rgba(193, 90, 46, 0.28), transparent 62%),
+    linear-gradient(160deg, var(--cream2), #e4d5b9 60%, var(--cream));
+  color: var(--ink-soft);
+  text-align: center;
+  padding: 24px;
+  filter: none;
+}
+
+.frame-ph .frame-svg {
+  width: 44px;
+  height: 44px;
+  color: var(--terra);
+  margin-bottom: 14px;
+  animation: spin 24s linear infinite;
+}
+
+.frame-ph-inner .mono {
+  color: var(--ink-soft);
+  opacity: 0.75;
+}
+
+.frame-ph-inner .frame-name {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--terra);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
